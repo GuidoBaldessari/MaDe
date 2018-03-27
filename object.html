@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)https://www.w3schools.com/w3css/tryw3css_templates_portfolio.htm# -->
+<html>
+  <head>
+    <title>Livello 3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/dep.css">
+    <style>
+      body,h1,h2,h3,h4,h5,h6 {font-family: "Open sans condensed", sans-serif}
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="http://daas.marconirovereto.it/QROggetti/DB.js"></script>
+    <script src="./js/getObject.js"></script>
+
+  </head>
+
+
+  <body class="light-grey content" background="assets/images/panoramica_ingresso1.jpg" style="max-width:1600px">
+
+    <!-- Sidebar/menu -->
+    <nav class="sidebar collapse verdes animate-left" style="z-index: 3; width: 300px; display: none;" id="mySidebar"><br>
+      <div class="container">
+        <a href="#" onclick="closebla()" class="hide-large right jumbo padding hover-grey" title="close menu">
+          <i class="fa fa-remove"></i>
+        </a>
+        <img src="./assets/images/logo.png" style="width:100%;"><br><br>
+        <h4><b>PROGETTO MADE</b></h4>
+      </div>
+
+      <div class="bar-block">
+        <a href="#portfolio" onclick="closebla()" class="bar-item button padding text-teal"><i class="fa fa-th-large fa-fw margin-right"></i>OGGETTI</a> 
+        <a href="https://www.w3schools.com/w3css/tryw3css_templates_portfolio.htm#about" onclick="closebla()" class="bar-item button padding"><i class="fa fa-envelope fa-fw margin-right"></i>PROGETTO</a> 
+        <a href="https://www.w3schools.com/w3css/tryw3css_templates_portfolio.htm#contact" onclick="closebla()" class="bar-item button padding"><i class="fa fa-user fa-fw margin-right"></i>RICONOSCIMENTI</a>
+      </div>
+
+      <!--<div class="panel large">
+        <i class="fa fa-facebook-official hover-opacity"></i>
+        <i class="fa fa-instagram hover-opacity"></i>
+        <i class="fa fa-snapchat hover-opacity"></i>
+        <i class="fa fa-pinterest-p hover-opacity"></i>
+        <i class="fa fa-twitter hover-opacity"></i>
+        <i class="fa fa-linkedin hover-opacity"></i>
+      </div>-->
+    </nav>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="overlay hide-large animate-opacity" onclick="closebla()" style="cursor: pointer; display: none;" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="main" style="margin-left:300px">
+
+      <!-- Header -->
+      <header id="portfolio" class="verdes">
+        <a href="#"><img src="./assets/images/logo.png" style="width:75px;" class="right margin hide-large hover-opacity"></a>
+        <span class="button hide-large xxlarge hover-text-grey" onclick="openbla()"><i class="fa fa-bars"></i></span>
+        <h1><b>BARRA DI RICERCA</b></h1>
+        <!--<div class="container">
+          <h1><b>BARRA DI RICERCA</b></h1>
+        </div>-->
+      </header>
+      
+      <!-- First Photo Grid-->
+      <div class="row-padding nero">
+        <div id="">
+            <script>
+
+              function getJsonFromUrl() {
+                var query = location.search.substr(1);
+                var result = {};
+                query.split("&").forEach(function(part) {
+                  var item = part.split("=");
+                  result[item[0]] = decodeURIComponent(item[1]);
+                });
+                return result;
+              }
+
+              
+
+              //per la ricerca c'è il metodo Trova, gli si passa la string della barra di ricerca con quel che vogliono cercare e lu la cerca in giro nei determinati campi
+              var result = getJsonFromUrl();
+              document.write(creaInfoLivello3(DB[33/*result.id*/])); //togliere il numero e lasciare result.id per usare il qr
+            
+              //document.write(createIndex());
+              //document.write(createTable());
+            </script>
+
+      </div>
+    </div>
+      
+      <div class="black center padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="hover-opacity">w3.css</a></div>
+
+    <!-- End page content -->
+    </div>
+
+    <script>
+      // Script to open and close sidebar
+      function openbla() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
+      
+      function closebla() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
