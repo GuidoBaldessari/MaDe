@@ -1,4 +1,3 @@
-
 var server = "http://daas.marconirovereto.it/QROggetti/";
 
 /*function addRow(label, value) {
@@ -68,7 +67,7 @@ function creaOggetto(ogg)
    //console.log(MakeImgOggPath(ogg.id_oggetto, ogg.url));
     
     $(oggetto).attr({
-        'class': 'object third container margin-bottom',
+        'class': 'object quarter container margin-bottom',
         'id': ogg.id_oggetto
     });
 
@@ -81,7 +80,7 @@ function creaOggetto(ogg)
     $(img).attr({
         'src': 'http://daas.marconirovereto.it/QROggetti/' +ogg.id_oggetto +'/' +ogg.immagini[0],
         //'src': MakeImgOggPath(ogg.id_oggetto, all.url),
-        'style': 'width:100%;height:350px;object-fit: cover' 
+        'style': 'width:100%;height:33.33333%;object-fit: cover' 
     }).appendTo(oggetto);
 
     $(testo).text(ogg.modello.ITA).appendTo(contenuto);
@@ -99,6 +98,7 @@ function creaOggetto(ogg)
 
 function popolaGriglia()
 {
+    console.log(DB);
     var riga = document.createElement('div');
     $(riga).attr({
         'class': 'row-padding',
@@ -110,7 +110,7 @@ function popolaGriglia()
     for(i = 0; i < DB.length; i++)
     {
         //console.log(i);
-        if(i % 3 == 0 && i > 0)
+        if(i % 4 == 0 && i > 0)
         {
             var secondoLivello = document.createElement('div');
             $(secondoLivello).attr({
@@ -146,7 +146,7 @@ function popolaGriglia()
             closeActive();
 
             item.parent().next().attr({'class':'row-padding active'}).show(); 
-            item.attr({'class':'object third container margin-bottom visualized'});
+            item.attr({'class':'object quarter container margin-bottom visualized'});
             var id = parseInt(item.context.id.split("_")[1]);
             var ogg = DB[id-1];
     
@@ -177,15 +177,15 @@ function popolaGriglia()
             //<a href="#portfolio" onclick="close()" class="bar-item button padding text-teal"><i class="fa fa-th-large fa-fw margin-right"></i>PORTFOLIO</a> 
             $(link).attr({
                 'class':'bar-item button padding text-teal keep-reading',
-                'href':'file://repo/Studenti$/Informatica/SezAi/4Ai/Thomas.Andreatta/Desktop/MaDe%2026-3-18/object.html?code='+ogg.id_oggetto
+                'href': './object.html' +'?code='+ogg.id_oggetto
             }).text('Continua a leggere...').appendTo(contenuto);
             $(contenuto).attr({'class':'twothird container'}).appendTo(lvl2);
 
         }
         else
-            {
-                closeActive();
-            }
+        {
+            closeActive();
+        }
       });
 }
 
@@ -197,7 +197,7 @@ function popolaGriglia()
 function closeActive()
 {
     $('.active').attr({'class':'row padding'}).hide();
-    $('.visualized').attr({'class':'object third container margin-bottom'})
+    $('.visualized').attr({'class':'object quarter container margin-bottom'})
 
 }
 
