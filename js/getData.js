@@ -61,7 +61,7 @@ function creaOggetto(ogg)
     //var link = document.createElement('a');
     var img = document.createElement('img');
     var contenuto = document.createElement('div');
-    var testo = document.createElement('h4');
+    var testo = document.createElement('p');
     
    console.log(ogg);
    //console.log(MakeImgOggPath(ogg.id_oggetto, ogg.url));

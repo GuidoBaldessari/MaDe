@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0065)https://www.w3schools.com/w3css/tryw3css_templates_portfolio.htm# -->
 <html>
-  <head>
+  <head>     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Livello 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/w3.css">
@@ -17,13 +17,14 @@
   </head>
   
   <body class="light-grey content" style="max-width:1600px" onload="popolaGriglia()">
-
+      
     <!-- Sidebar/menu -->
-    <nav class="sidebar collapse white animate-left" style="z-index: 3; width: 300px; display: none;" id="mySidebar">
+    <nav class="sidebar collapse white animate-left" style="z-index: 3; width: 300px; height:100%; display: none;" id="mySidebar">
       <br>
-      <div class="container">
+      <div class="container">         
         <a href="#" onclick="close()" class="hide-large right jumbo padding hover-grey" title="close menu">
           <i class="fa fa-remove"></i>
+          
         </a>
         <img src="./assets/images/avatar_g2.jpg" style="width:45%;" class="round"><br><br>
         <h4><b>PORTFOLIO</b></h4>
@@ -52,10 +53,10 @@
 
       <!-- Header -->
       <header id="portfolio">
-        <a href="#"><img src="./assets/images/avatar_g2.jpg" style="width:65px;" class="circle right margin hide-large hover-opacity"></a>
+        <a href="#"><img src="./assets/images/avatar_g2.jpg" style="width:65px; height: 100%;" class="circle right margin hide-large hover-opacity"></a>
         <span class="button hide-large xxlarge hover-text-grey" onclick="open()"><i class="fa fa-bars"></i></span>
         <div class="container">
-          <h1><b>Oggetti</b></h1>
+          <h1><b>Oggetti </b><input type="text" name="Name" required="" style="height:5%"><button type="submit" name="Submit" style></button></h1>
           <div class="section bottombar padding-16">
             <span class="margin-right">Filtra:</span> 
             <button class="button black">Tutti</button>
@@ -65,6 +66,7 @@
           </div>
         </div>
       </header>
+      
       
 
       <!-- First Photo Grid-->

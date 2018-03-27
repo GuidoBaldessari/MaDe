@@ -51,9 +51,11 @@ function MakeAllegatiURL(id_oggetto, all) {
 function creaInfoLivello3(ogg) {
     var s = "";
 
-    s += "<h2>" + ogg.modello.ITA + "</h2><br>";
+    s += "<span style='display:block' class='verdec'><h2>" + ogg.modello.ITA + "</h2></span><br>";
     s += "<table style='text-align:left'>";
-    if (ogg.nazione.length > 0) s += "<tr><th width=110px><p><i>Nazione:</i></p></th><td><p>" + ogg.nazione + "</p></td></tr>";
+    if (ogg.nazione.length > 0) {
+         s += "<tr><th width=110px><p><i>Nazione:</i></p></th><td><p>" + ogg.nazione + "</p></td></tr>";
+    }
     if (ogg.data_prod.length > 0) s += "<tr><th><p><i>Data produzione:</i></p></th><td><p>" + ogg.data_prod + "</p></td></tr>";
     if (ogg.autore.length > 0) s += "<tr><th><p><i>Autore:</i></p></th><td><p>" + ogg.autore + "</p></td></tr>";
     if (ogg.provenienza.length > 0) s += "<tr><th><p><i>Provenienza:</i></p></th><td><p>" + ogg.provenienza + "</p></td></tr>";
@@ -80,9 +82,9 @@ function creaInfoLivello3(ogg) {
     if (ogg.allegati.length > 0) {
         s += "<h3 style='text-align:center'>Allegati</h3>";
         for (var i = 0; i < ogg.allegati.length; i++) {
-            console.log(ogg.allegati[i].tipo);
-            console.log(ogg.allegati[i].url);
-            console.log(ogg.allegati[i].descrizione_breve.ITA);
+            //console.log(ogg.allegati[i].tipo);
+            //console.log(ogg.allegati[i].url);
+            //console.log(ogg.allegati[i].descrizione_breve.ITA);
         }
     }
     
