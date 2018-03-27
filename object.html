@@ -56,42 +56,25 @@
     <div class="main" style="margin-left:300px">
 
       <!-- Header -->
-      <header id="portfolio" class="verdes">
-        <a href="#"><img src="./assets/images/logo.png" style="width:75px;" class="right margin hide-large hover-opacity"></a>
-        <span class="button hide-large xxlarge hover-text-grey" onclick="openbla()"><i class="fa fa-bars"></i></span>
-        <h1><b>BARRA DI RICERCA</b></h1>
-        <!--<div class="container">
-          <h1><b>BARRA DI RICERCA</b></h1>
-        </div>-->
-      </header>
+      <!--<header id="portfolio">
+        <a href="#"><img src="./assets/images/avatar_g2.jpg" style="width:65px;" class="circle right margin hide-large hover-opacity"></a>
+        <span class="button hide-large xxlarge hover-text-grey" onclick="open()"><i class="fa fa-bars"></i></span>
+        <div class="container">
+        <h1><b>My Portfolio</b></h1>
+        <div class="section bottombar padding-16">
+          <span class="margin-right">Filter:</span> 
+          <button class="button black">ALL</button>
+          <button class="button white"><i class="fa fa-diamond margin-right"></i>Design</button>
+          <button class="button white hide-small"><i class="fa fa-photo margin-right"></i>Photos</button>
+          <button class="button white hide-small"><i class="fa fa-map-pin margin-right"></i>Art</button>
+        </div>
+        </div>
+      </header>-->
       
       <!-- First Photo Grid-->
-      <div class="row-padding nero">
-        <div id="">
-            <script>
-
-              function getJsonFromUrl() {
-                var query = location.search.substr(1);
-                var result = {};
-                query.split("&").forEach(function(part) {
-                  var item = part.split("=");
-                  result[item[0]] = decodeURIComponent(item[1]);
-                });
-                return result;
-              }
-
-              
-
-              //per la ricerca c'è il metodo Trova, gli si passa la string della barra di ricerca con quel che vogliono cercare e lu la cerca in giro nei determinati campi
-              var result = getJsonFromUrl();
-              document.write(creaInfoLivello3(DB[33/*result.id*/])); //togliere il numero e lasciare result.id per usare il qr
-            
-              //document.write(createIndex());
-              //document.write(createTable());
-            </script>
-
+      <div class="row-padding">
+        <div id="info"></div>
       </div>
-    </div>
       
       <div class="black center padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="hover-opacity">w3.css</a></div>
 

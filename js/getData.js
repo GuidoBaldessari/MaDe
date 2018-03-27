@@ -67,7 +67,10 @@ function creaOggetto(ogg)
    console.log(ogg);
    //console.log(MakeImgOggPath(ogg.id_oggetto, ogg.url));
     
-    $(oggetto).attr('class', 'object third container margin-bottom');
+    $(oggetto).attr({
+        'class': 'object third container margin-bottom',
+        'id': ogg.id_oggetto
+    });
 
     /*$(img).attr({
         'src': 'http://daas.marconirovereto.it/QROggetti/' +ogg.id_oggetto +'/' +ogg.immagini[0],
@@ -112,13 +115,16 @@ function popolaGriglia()
             var secondoLivello = document.createElement('div');
             $(secondoLivello).attr({
                 'class': 'row-padding',
-                'style': 'background-color:black; height: 200px; visible:false',
+                'style': 'height: 30%;',
+                'id' : 'row' + i/3
             }).hide();
+
             $('#griglia').append(secondoLivello);
 
-            var riga = document.createElement('div');
+            var riga = document.createElement('div');     
+
             $(riga).attr({
-                'class': 'row-padding',
+                'class': 'row-padding',                
             });
             $('#griglia').append(riga);
 
@@ -128,12 +134,71 @@ function popolaGriglia()
 
     }
 
-    $(".object").click(function() {
-        //Mostra row
+    $(".object").click(function(e) {
 
-        popolaSecondoLivello($(this));
+        
 
+        var item = $(this); 
+        console.log(item.parent());
+
+        if(!item.hasClass('visualized'))
+        {
+            closeActive();
+
+            item.parent().next().attr({'class':'row-padding active'}).show(); 
+            item.attr({'class':'object third container margin-bottom visualized'});
+            var id = parseInt(item.context.id.split("_")[1]);
+            var ogg = DB[id-1];
+    
+            var lvl2 = item.parent().next().empty();
+            
+            var div = document.createElement('div');
+            var img = document.createElement('img');
+            var contenuto = document.createElement('div');
+            var titolo = document.createElement('h2');
+            var descrizione = document.createElement('p'); 
+            var link = document.createElement('a');
+    
+    
+        
+            //Popola il primo div all'interno della visualizzazione di secondo livello
+            $(img).attr({
+                'src': 'http://daas.marconirovereto.it/QROggetti/' +ogg.id_oggetto +'/' +ogg.immagini[0],
+                'style': 'width:100%;height:350px;object-fit: cover' 
+            }).appendTo(div);
+            $(div).attr({
+                'class': 'third container margin-bottom',
+            }).appendTo(lvl2);
+    
+            
+            //Popola il secondo div all'interno della visualizzazione di secondo livello    
+            $(titolo).text(ogg.modello.ITA).appendTo(contenuto);
+            $(descrizione).html(ogg.descrizione.ITA).appendTo(contenuto);
+            //<a href="#portfolio" onclick="close()" class="bar-item button padding text-teal"><i class="fa fa-th-large fa-fw margin-right"></i>PORTFOLIO</a> 
+            $(link).attr({
+                'class':'bar-item button padding text-teal keep-reading',
+                'href':'file://repo/Studenti$/Informatica/SezAi/4Ai/Thomas.Andreatta/Desktop/MaDe%2026-3-18/object.html?code='+ogg.id_oggetto
+            }).text('Continua a leggere...').appendTo(contenuto);
+            $(contenuto).attr({'class':'twothird container'}).appendTo(lvl2);
+
+        }
+        else
+            {
+                closeActive();
+            }
       });
+}
+
+/*$('.active').click(function() {
+    closeActive();
+})*/
+
+
+function closeActive()
+{
+    $('.active').attr({'class':'row padding'}).hide();
+    $('.visualized').attr({'class':'object third container margin-bottom'})
+
 }
 
 function popolaSecondoLivello(ogg)
@@ -145,8 +210,7 @@ function popolaSecondoLivello(ogg)
 function grigliaConSala(id_sala)
 {
     for(i = 0; i < DB.length; i++)
-    {
-        //console.log(i);
+    {        
         if(DB[i].id_sala == id_sala)
         {
             if(i % 3 == 0 || i == 0)
@@ -181,53 +245,3 @@ function grigliaConCollezione(id_collezione)
         }
     }
 }
-
-/*function createTable() {
-
-    var s = "";
-
-    for (var i in DB) {
-        ogg = DB[i];
-        cnt = eval(i) + 1;
-        if (ogg.id_oggetto != "QR_00xx") {
-            s += "<h3>Oggetto n° " + cnt + "</h3>";
-            s += "<table id='" + ogg.id_oggetto + "' border=1>";
-            s += addRow("ID Oggetto", "<strong>" + ogg.id_oggetto + "</strong>");
-            s += addRow("ID Collezione", ogg.id_collezione);
-            s += addRow("ID Sala", ogg.id_sala);
-            s += addRow("Gruppo", ogg.gruppo_made);
-            s += addRow("Modello (ITA)", ogg.modello.ITA);
-            s += addRow("Modello (ENG)", ogg.modello.ENG);
-            s += addRow("Descrizione (ITA)", ogg.descrizione.ITA);
-            s += addRow("Descrizione (ENG)", ogg.descrizione.ENG);
-            s += addRow("Nazioni", ogg.nazione);
-            s += addRow("Calibro", ogg.calibro);
-            s += addRow("Misure (ITA)", ogg.misure.ITA);
-            s += addRow("Misure (ENG)", ogg.misure.ENG);
-            s += addRow("Data Prod", ogg.data_prod);
-            s += addRow("Autore", ogg.autore);
-            s += addRow("Provenienza", ogg.provenienza);
-            s += addRow("Note", ogg.note);
-            s += addRow("img1", "<img src='" + MakeImgOggPath(ogg.id_oggetto, ogg.immagini[0]) + "' width='128px' />");
-            s += addRow("img2", "<img src='" + MakeImgOggPath(ogg.id_oggetto, ogg.immagini[1]) + "' width='128px' />");
-            s += addRow("img3", "<img src='" + MakeImgOggPath(ogg.id_oggetto, ogg.immagini[2]) + "' width='128px' />");
-            s += "</table>";
-            s += "<br />";
-            s += "<h4>Allegati</h4>";
-            s += "<table border=1>"
-            s += "<tr><th>Tipo</th><th>URL</th><th>Des ITA</th><th>Des ENG</th></tr>";
-            for (var k in ogg.allegati) {
-                var all = ogg.allegati[k];
-                s += "<tr><td>" + all.tipo + "</td><td>"
-                s += MakeAllegatiURL(ogg.id_oggetto,all) + "</td><td>"
-                s += all.descrizione_breve.ITA + "</td><td>"
-                s += all.descrizione_breve.ENG + "</td></tr>";
-            }
-            s += "</table>"
-        }
-        else {
-            s += "<h3>Oggetto n° " + cnt + " --  da fare!</h3>";
-        }
-    }
-    return s;
-}*/

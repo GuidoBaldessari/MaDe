@@ -109,3 +109,24 @@ function Trova(stringa){
 
     return ListaElementi;
 }
+
+function getJsonFromUrl() {
+    var query = location.search.substr(1);
+    var result = {};
+    query.split("&").forEach(function(part) {
+      var item = part.split("=");
+      result[item[0]] = decodeURIComponent(item[1]);
+      
+    });
+    return result;
+  }
+
+$(function() {
+    //per la ricerca c'è il metodo Trova, gli si passa la string della barra di ricerca con quel che vogliono cercare e lu la cerca in giro nei determinati campi
+    var result = getJsonFromUrl();    
+    var id = parseInt(result.code.split("_")[1]); 
+
+    $('#info').append(creaInfoLivello3(DB[id-1])); //togliere il numero e lasciare result.id per usare il qr
+});
+
+  
