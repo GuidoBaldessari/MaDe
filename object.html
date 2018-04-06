@@ -26,9 +26,7 @@
     <!-- Sidebar/menu -->
     <nav class="sidebar collapse verdes animate-left" style="z-index: 3; width: 300px; display: none;" id="mySidebar"><br>
       <div class="container">
-        <a href="#" onclick="closebla()" class="hide-large right jumbo padding hover-grey" title="close menu">
-          <i class="fa fa-remove"></i>
-        </a>
+        <a href="#" onclick="closebla()" class="hide-large right jumbo padding hover-grey" title="close menu"><img src="./icone/x.png" width="80px"></a>
         <img src="./assets/images/logo.png" style="width:100%;"><br><br>
         <h4><b>PROGETTO MADE</b></h4>
       </div>
@@ -53,30 +51,21 @@
     <div class="overlay hide-large animate-opacity" onclick="closebla()" style="cursor: pointer; display: none;" title="close side menu" id="myOverlay"></div>
 
     <!-- !PAGE CONTENT! -->
-    <div class="main" style="margin-left:300px" class="nero">
+    <div class="main" style="margin-left:300px">
 
       <!-- Header -->
-      <!--<header id="portfolio">
-        <a href="#"><img src="./assets/images/avatar_g2.jpg" style="width:65px;" class="circle right margin hide-large hover-opacity"></a>
-        <span class="button hide-large xxlarge hover-text-grey" onclick="open()"><i class="fa fa-bars"></i></span>
-        <div class="container">
-        <h1><b>My Portfolio</b></h1>
-        <div class="section bottombar padding-16">
-          <span class="margin-right">Filter:</span> 
-          <button class="button black">ALL</button>
-          <button class="button white"><i class="fa fa-diamond margin-right"></i>Design</button>
-          <button class="button white hide-small"><i class="fa fa-photo margin-right"></i>Photos</button>
-          <button class="button white hide-small"><i class="fa fa-map-pin margin-right"></i>Art</button>
+      <header id="portfolio">
+        <a href="#"><img src="./assets/images/logo.png" style="width:65px;" class="circle right margin hide-large hover-opacity"></a>
+        <span class="button hide-large xxlarge hover-text-grey" onclick="openbla()"><img src="icone/menu.png"></span>
+        <div class="container verdec" id="header">
         </div>
-        </div>
-      </header>-->
+      </header>
       
-      <!-- First Photo Grid-->
-      <div class="row-padding">
-        <div id="info"></div>
-      </div>
+      <!-- First Photo Grid -->
+      <div class="row-padding nero" id="info"></div>
       
-      <div class="black center padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="hover-opacity">w3.css</a></div>
+      <!-- Footer -->
+      <div class="dark-grey center padding-24">FOOTER</div>
 
     <!-- End page content -->
     </div>

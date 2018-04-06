@@ -51,7 +51,7 @@ function MakeAllegatiURL(id_oggetto, all) {
 function creaInfoLivello3(ogg) {
     var s = "";
 
-    s += "<span style='display:block' class='verdec'><h2>" + ogg.modello.ITA + "</h2></span><br>";
+    document.getElementById("header").innerHTML = "<h2>" + ogg.modello.ITA + "</h2>";
     s += "<table style='text-align:left'>";
     if (ogg.nazione.length > 0) {
          s += "<tr><th width=110px><p><i>Nazione:</i></p></th><td><p>" + ogg.nazione + "</p></td></tr>";
