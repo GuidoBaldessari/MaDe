@@ -74,10 +74,17 @@ function creaInfoLivello3(ogg) {
     });*/
 
     s += "<h3 style='text-align:center'>Immagini</h3>";
-    for (var i = 0; i < 4; i++) {
-        s += "<div  class='quarter container margin-bottom'><img src=" + MakeImgOggPath2(ogg.id_oggetto, i+1) + " style='width:100%;height:100%;object-fit: cover'" + " class='hover-opacity'>" /*+ "<div class='container white'><p><b>Immagine</b></p><p>Descrizione.</p></div>" */ + "</div>";
+    var type;
+    if (ogg.immagini.length >= 4) {
+        type = "quarter";
+    } else if (ogg.immagini.length == 3) {
+        type = "third";
+    } else {
+        type = "half";
     }
-
+    for (var i = 0; i < ogg.immagini.length; i++) {
+        s += "<div  class='" + type + " container margin-bottom' onclick='openModal()' ><img src=" + MakeImgOggPath2(ogg.id_oggetto, i+1) + " style='width:100%;height:100%;object-fit: cover'" + " class='hover-opacity'>" + "</div>";
+    }
 
     if (ogg.allegati.length > 0) {
         s += "<h3 style='text-align:center'>Allegati</h3>";
@@ -111,4 +118,15 @@ $(function() {
     $('#info').append(creaInfoLivello3(DB[id-1])); //togliere il numero e lasciare result.id per usare il qr
 });
 
-  
+
+// When the user clicks on the button, open the modal 
+function openModal() {
+    console.log("OPEN");
+    document.getElementById('myModal').style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+function closeModal () {
+    console.log("CLOSE");
+    document.getElementById('myModal').style.display = "none";
+}
