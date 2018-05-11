@@ -54,7 +54,7 @@ function MakeAllegatiURL(id_oggetto, all) {
     </div>
  */
 
-function creaOggetto(ogg)
+function creaOggetto(ogg, penultimo)
 {
     
     var oggetto = document.createElement('div');
@@ -91,120 +91,101 @@ function creaOggetto(ogg)
     /*$(link).attr({
         'href':'http://daas.marconirovereto.it/QROggetti/' +ogg.id_oggetto +'/' +ogg.immagini[0], //Link pagina dettaglio oggetto
     }).appendTo(oggetto)*/
-
-    $('#griglia .row-padding:last').append(oggetto);
+    console.log("Penultimo:"+penultimo + "  Oggetto:"+oggetto);
+    $(penultimo).append(oggetto); //Penultimo serve per selezionare la row corretta in cui mettere l'immagine e la didascalia di ogni oggetto
 
 }
 
 function popolaGriglia()
 {
-    console.log(DB);
-    var riga = document.createElement('div');
-    $(riga).attr({
-        'class': 'row-padding',
-    });
-    $('#griglia').append(riga);
+    //console.log(DB);
 
-
-    //console.log('funzia');
-    for(i = 0; i < DB.length; i++)
+    for(i = 0; i < DB.length; i++)                                  //Ciclo per scorrere tutti gli oggetti
     {
-        //console.log(i);
-        if(i % 4 == 0 && i > 0)
+        if(i % 4 == 0)
         {
-            var secondoLivello = document.createElement('div');
-            $(secondoLivello).attr({
-                'class': 'row-padding',
-                'style': 'height: 30%;',
-                'id' : 'row' + i/3
-            }).hide();
+            var riga = document.createElement('div');               //Crea la riga per contenere gli oggetti
+            $(riga).attr({                                          //                                  
+                'class': 'row-padding',                             //  
+            });                                                     //
+            $('#griglia').append(riga);                             //
 
-            $('#griglia').append(secondoLivello);
-
-            var riga = document.createElement('div');     
-
-            $(riga).attr({
-                'class': 'row-padding',                
-            });
-            $('#griglia').append(riga);
-
-
+            var secondoLivello = document.createElement('div');     //Crea la riga per la visualizzazione di secondo livello
+            $(secondoLivello).attr({                                //
+                'class': 'row-padding',                             //
+                'style': 'height: 30%;',                            //
+                'id' : 'row' + i/4                                  //
+            }).hide();                                              //
+            $('#griglia').append(secondoLivello);                   //
         }
-        creaOggetto(DB[i]);
+
+        creaOggetto(DB[i],riga);                                    //Chiamata al metodo che aggiunge un oggetto alla volta nella prima riga
 
     }
 
-    $(".object").click(function(e) {
-
-        
+    $(".object").click(function(e) {                                //Metodo per gestire il comportamento della visualizzazione di secondo livello
 
         var item = $(this); 
         console.log(item.parent());
 
-        if(!item.hasClass('visualized'))
+        if(!item.hasClass('visualized'))                            //Se la visualizzazione di secondo livello non è visualizzata per un elemento
         {
-            closeActive();
+            closeActive();                                          //Si chiude la visualizzazione di secondo livello 
 
-            item.parent().next().attr({'class':'row-padding active'}).show(); 
-            item.attr({'class':'object quarter container margin-bottom visualized'});
-            var id = parseInt(item.context.id.split("_")[1]);
-            var ogg = DB[id-1];
-    
-            var lvl2 = item.parent().next().empty();
-            
-            var div = document.createElement('div');
-            var img = document.createElement('img');
-            var contenuto = document.createElement('div');
-            var titolo = document.createElement('h2');
-            var descrizione = document.createElement('p'); 
-            var link = document.createElement('a');
-    
-    
-        
-            //Popola il primo div all'interno della visualizzazione di secondo livello
-            $(img).attr({
-                'src': 'http://daas.marconirovereto.it/QROggetti/' +ogg.id_oggetto +'/' +ogg.immagini[0],
-                'style': 'width:100%;height:350px;object-fit: cover' 
-            }).appendTo(div);
-            $(div).attr({
-                'class': 'third container margin-bottom',
-            }).appendTo(lvl2);
-    
-            
-            //Popola il secondo div all'interno della visualizzazione di secondo livello    
-            $(titolo).text(ogg.modello.ITA).appendTo(contenuto);
-            $(descrizione).html(ogg.descrizione.ITA).appendTo(contenuto);
-            //<a href="#portfolio" onclick="close()" class="bar-item button padding text-teal"><i class="fa fa-th-large fa-fw margin-right"></i>PORTFOLIO</a> 
-            $(link).attr({
-                'class':'bar-item button padding text-teal keep-reading',
-                'href': './object.html' +'?code='+ogg.id_oggetto
-            }).text('Continua a leggere...').appendTo(contenuto);
-            $(contenuto).attr({'class':'twothird container'}).appendTo(lvl2);
+            item.parent().next().attr({'class':'row-padding active'}).show();           //Si mostra la riga per la visualizzazione di secondo livello 
+            item.attr({'class':'object quarter container margin-bottom visualized'});   //L'oggetto visualizzato riceve una class con l'aggiunta di visualized
 
+            popolaSecondoLivello(item); //Si popola la visualizzazione di secondo livello
         }
         else
         {
-            closeActive();
+            closeActive();  //Se invece la visualizzazione di secondo livello è già visualizzata per un elemento, allora si chiude la visualizzazione di secondo livello e basta
         }
       });
 }
 
-/*$('.active').click(function() {
-    closeActive();
-})*/
-
-
 function closeActive()
 {
-    $('.active').attr({'class':'row padding'}).hide();
-    $('.visualized').attr({'class':'object quarter container margin-bottom'})
+    $('.active').attr({'class':'row padding'}).hide(); //Si nasconde la riga per la visualizzazione di secondo livello
+    $('.visualized').attr({'class':'object quarter container margin-bottom'}) //Si fa tornare la class dell'oggetto precedentemente visualizzato al suo stato originale 
 
 }
 
-function popolaSecondoLivello(ogg)
+function popolaSecondoLivello(item)
 {
-    var newOgg = ogg;
-    $('#secondoLivello').append(newOgg);
+    var id = parseInt(item.context.id.split("_")[1]);
+    var ogg = DB[id-1];
+
+    var lvl2 = item.parent().next().empty();
+    
+    var div = document.createElement('div');
+    var img = document.createElement('img');
+    var contenuto = document.createElement('div');
+    var titolo = document.createElement('h2');
+    var descrizione = document.createElement('p'); 
+    var link = document.createElement('a');
+
+
+
+    //Popola il primo div all'interno della visualizzazione di secondo livello
+    $(img).attr({
+        'src': 'http://daas.marconirovereto.it/QROggetti/' +ogg.id_oggetto +'/' +ogg.immagini[0],
+        'style': 'width:100%;height:350px;object-fit: cover' 
+    }).appendTo(div);
+    $(div).attr({
+        'class': 'third container margin-bottom',
+    }).appendTo(lvl2);
+
+    
+    //Popola il secondo div all'interno della visualizzazione di secondo livello    
+    $(titolo).text(ogg.modello.ITA).appendTo(contenuto);
+    $(descrizione).html(ogg.descrizione.ITA).appendTo(contenuto);
+    //<a href="#portfolio" onclick="close()" class="bar-item button padding text-teal"><i class="fa fa-th-large fa-fw margin-right"></i>PORTFOLIO</a> 
+    $(link).attr({
+        'class':'bar-item button padding text-teal keep-reading',
+        'href': './object.html' +'?code='+ogg.id_oggetto
+    }).text('Continua a leggere...').appendTo(contenuto);
+    $(contenuto).attr({'class':'twothird container'}).appendTo(lvl2);
 }
 
 function grigliaConSala(id_sala)

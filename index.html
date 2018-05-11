@@ -13,7 +13,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="http://daas.marconirovereto.it/QROggetti/DB.js"></script>
     <script src="js/getData.js"></script>
-    <script src="js/object.js"></script>
+
+    <script src="js/getObject.js"></script>
   </head>
   
   <body class="light-grey content" style="max-width:1600px" onload="popolaGriglia()">
@@ -56,7 +57,14 @@
         <a href="#"><img src="./assets/images/avatar_g2.jpg" style="width:65px; height: 100%;" class="circle right margin hide-large hover-opacity"></a>
         <span class="button hide-large xxlarge hover-text-grey" onclick="open()"><i class="fa fa-bars"></i></span>
         <div class="container">
-          <h1><b>Oggetti </b><input type="text" name="Name" required="" style="height:5%"><button class="button white" onclick="Trova()">Cerca</button></h1>
+          <h1>
+            <b>Oggetti </b>
+            <form>
+              <input type="text" id="stringaRicerca" style="height:5%">
+              <a class="button white" onclick="Trova()">Cerca</a>
+            </form>
+
+          </h1>
           <div class="section bottombar padding-16">
             <span class="margin-right">Filtra:</span> 
             <button class="button black">Tutti</button>
@@ -71,7 +79,7 @@
 
       <!-- First Photo Grid-->
       <div id="griglia"></div>
-      <div class="black center padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="hover-opacity">w3.css</a></div>
+      <footer class="black center padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="hover-opacity">w3.css</a></footer>
 
     </div> <!-- End page content -->
 
