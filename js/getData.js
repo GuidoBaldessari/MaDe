@@ -99,7 +99,7 @@ function creaOggetto(ogg, penultimo)
 function popolaGriglia()
 {
     //console.log(DB);
-
+    $('#griglia').empty();
     for(i = 0; i < DB.length; i++)                                  //Ciclo per scorrere tutti gli oggetti
     {
         if(i % 4 == 0)
@@ -190,20 +190,41 @@ function popolaSecondoLivello(item)
 
 function grigliaConSala(id_sala)
 {
-    for(i = 0; i < DB.length; i++)
-    {        
+
+    $('#griglia').empty();
+
+    console.log("!!!!!!!!!!!"+$('#griglia'));
+
+   for(i = 1; i < DB.length; i++)                                  //Ciclo per scorrere tutti gli oggetti
+    {
+        console.log(i)
         if(DB[i].id_sala == id_sala)
         {
-            if(i % 3 == 0 || i == 0)
+            
+            if(i % 4 == 0)
             {
-                var riga = document.createElement('div');
-                $(riga).attr({
-                    'class': 'row-padding',
-                });
-                $('#griglia').append(riga);
+                console.log("funzia");
+                var riga = document.createElement('div');               //Crea la riga per contenere gli oggetti
+                $(riga).attr({                                          //                                  
+                    'class': 'row-padding',                             //  
+                });                                                     //
+                $('#griglia').append(riga);                             //
+    
+                var secondoLivello = document.createElement('div');     //Crea la riga per la visualizzazione di secondo livello
+                $(secondoLivello).attr({                                //
+                    'class': 'row-padding',                             //
+                    'style': 'height: 30%;',                            //
+                    'id' : 'row' + i/4                                  //
+                }).hide();                                              //
+                $('#griglia').append(secondoLivello);                   //
             }
-            creaOggetto(DB[i]);
+    
+            creaOggetto(DB[i],riga);                                    //Chiamata al metodo che aggiunge un oggetto alla volta nella prima riga
+
         }
+
+        
+
     }
 }
 
@@ -227,7 +248,9 @@ function grigliaConCollezione(id_collezione)
     }
 }
 
-function Trova(stringa){        
+function Trova(){     
+    let stringa = $("input").val();
+
     stringa = stringa.toLowerCase();
     var ListaElementi = [];
 
@@ -243,5 +266,10 @@ function Trova(stringa){
                 }       
     });
 
-    return ListaElementi;
+    MostraRisultati(ListaElementi);
+}
+
+function MostraRisultati(ListaElementi)
+{
+    $('#griglia')
 }
