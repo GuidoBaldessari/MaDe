@@ -91,24 +91,6 @@ function creaInfoLivello3(ogg) {
     return s;
 }
 
-function Trova(stringa){        
-    stringa = stringa.toLowerCase();
-    var ListaElementi = [];
-
-    DB.forEach(function(ogg) 
-    {
-        if(ogg.descrizione.ITA.toLowerCase().search(stringa) != -1 ||
-             ogg.modello.ITA.toLowerCase().search(stringa) != -1 || 
-             ogg.modello.ENG.toLowerCase().search(stringa) != -1 || 
-             ogg.descrizione.ENG.toLowerCase().search(stringa) != -1 ||
-             ogg.nazione.toLowerCase().search(stringa) != -1)
-                {                    
-                    ListaElementi.push(ogg.id_oggetto);
-                }       
-    });
-
-    return ListaElementi;
-}
 
 function getJsonFromUrl() {
     var query = location.search.substr(1);
