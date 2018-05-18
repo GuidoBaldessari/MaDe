@@ -83,7 +83,7 @@ function creaInfoLivello3(ogg) {
         type = "half";
     }
     for (var i = 0; i < ogg.immagini.length; i++) {
-        s += "<div  class='" + type + " container margin-bottom' onclick='openModal()' ><img src=" + MakeImgOggPath2(ogg.id_oggetto, i+1) + " style='width:100%;height:100%;object-fit: cover'" + " class='hover-opacity'>" + "</div>";
+        s += "<div  class='" + type + " container margin-bottom' onclick='openModal()' ><img src=" + MakeImgOggPath2(ogg.id_oggetto, i+1) + " style='width:100%;height:100%;object-fit: cover'" + " class='hover-opacity2'>" + "</div>";
     }
 
     if (ogg.allegati.length > 0) {
