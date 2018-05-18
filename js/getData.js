@@ -188,22 +188,37 @@ function popolaSecondoLivello(item)
     $(contenuto).attr({'class':'twothird container'}).appendTo(lvl2);
 }
 
+function popolaSale()
+{
+    $('#griglia').empty();
+
+    for (let i = 1; i <= DB[DB.length -1].id_sala; i++) 
+    {
+        var row = document.createElement('div');
+        var sala = document.createElement('h2');
+
+        $(sala).text('Sala: '+i);
+        $(row).append(sala);
+        $('#griglia').append(row);
+
+        grigliaConSala(i);
+        
+    }
+}
+
 function grigliaConSala(id_sala)
 {
 
-    $('#griglia').empty();
+    let contaElementiPerRiga = 0;                                       //E' importante riconoscere il primo oggetto di una sala per impaginare le righe in modo corretto
 
-    console.log("!!!!!!!!!!!"+$('#griglia'));
-
-   for(i = 1; i < DB.length; i++)                                  //Ciclo per scorrere tutti gli oggetti
+    for(i = 1; i < DB.length; i++)                                      //Ciclo per scorrere tutti gli oggetti
     {
-        console.log(i)
         if(DB[i].id_sala == id_sala)
         {
-            
-            if(i % 4 == 0)
+            if(contaElementiPerRiga == 0)
             {
-                console.log("funzia");
+                contaElementiPerRiga++;
+
                 var riga = document.createElement('div');               //Crea la riga per contenere gli oggetti
                 $(riga).attr({                                          //                                  
                     'class': 'row-padding',                             //  
@@ -218,13 +233,9 @@ function grigliaConSala(id_sala)
                 }).hide();                                              //
                 $('#griglia').append(secondoLivello);                   //
             }
-    
             creaOggetto(DB[i],riga);                                    //Chiamata al metodo che aggiunge un oggetto alla volta nella prima riga
 
         }
-
-        
-
     }
 }
 
