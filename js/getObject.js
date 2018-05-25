@@ -32,14 +32,14 @@ function MakeAllegatiPath(id, allegato) {
     return server + id + "/" + allegato;
 }
 
-function MakeAllegatiURL(id_oggetto, all) {
+function MakeAllegatiURL(id_oggetto, all, style) {
     switch (all.tipo) {
         case 0:
             return "<audio controls><source src='" + MakeAllegatiPath(id_oggetto, all.url) + "' type='audio/mpeg'></audio>";;
         case 1:
-            return '<video width="320" height="240" controls><source src="' + MakeAllegatiPath(id_oggetto, all.url) +'" type="video/mp4"></video>'; 
+            return "<video " + style + "controls><source src='" + MakeAllegatiPath(id_oggetto, all.url) + "' type='video/mp4'></video>"; 
         case 2:
-            return "<img src='" + MakeImgOggPath(id_oggetto, all.url) + "' width='128px' />"; 
+            return "<img src='" + MakeImgOggPath(id_oggetto, all.url) + "' " + style + "/>"; 
         case 3:
             return '<a href="' + all.url + '">' + all.url +'</a>';
         default:
@@ -65,14 +65,6 @@ function creaInfoLivello3(ogg) {
     if (ogg.misure.ITA.length > 0) s += "<tr><th style='vertical-align:top'><p><i>Misure:</i></p></th><td><p>" + ogg.misure.ITA + "</p></td></tr>";
     s += "</table>";
 
-
-    /*var testFolder = server + ogg.id;
-    var fs = require('fs');
-    
-    fs.readdirSync(testFolder).forEach(file => {
-      console.log(file);
-    });*/
-
     s += "<h3 style='text-align:center'>Immagini</h3>";
     var type;
     if (ogg.immagini.length >= 4) {
@@ -88,10 +80,32 @@ function creaInfoLivello3(ogg) {
 
     if (ogg.allegati.length > 0) {
         s += "<h3 style='text-align:center'>Allegati</h3>";
+        if (ogg.allegati.length >= 4) {
+            type = "quarter";
+        } else if (ogg.allegati.length == 3) {
+            type = "third";
+        } else {
+            type = "half";
+        }
+        console.log(type);
         for (var i = 0; i < ogg.allegati.length; i++) {
-            //console.log(ogg.allegati[i].tipo);
-            //console.log(ogg.allegati[i].url);
-            //console.log(ogg.allegati[i].descrizione_breve.ITA);
+
+
+                console.log(MakeAllegatiURL(ogg.id_oggetto, ogg.allegati[i]));
+                var style = "style='width:100%;height:100%;object-fit: cover;'";
+                s += "<div  class='" + type + " container margin-bottom' ><b><i>Allegato " + (i + 1) + "</i></b>";
+                if (ogg.allegati[i].tipo == 0) s += " (audio)";
+                else if (ogg.allegati[i].tipo == 1) s += " (video)";
+                else if (ogg.allegati[i].tipo == 2) s += " (immagine)";
+                else if (ogg.allegati[i].tipo == 3) s += " (link)";
+                
+                s += MakeAllegatiURL(ogg.id_oggetto, ogg.allegati[i], style) + "</div>";
+
+
+            
+            console.log(ogg.allegati[i].tipo);
+            console.log(ogg.allegati[i].url);
+            console.log(ogg.allegati[i].descrizione_breve.ITA);
         }
     }
     
