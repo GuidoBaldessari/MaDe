@@ -194,28 +194,59 @@ function popolaSale()
 
     for (let i = 1; i <= DB[DB.length -1].id_sala; i++) 
     {
-        var row = document.createElement('div');
-        var sala = document.createElement('h2');
-
-        $(sala).text('Sala: '+i);
-        $(row).append(sala);
-        $('#griglia').append(row);
-
-        grigliaConSala(i);
-        
+        if(i != 4 && i != 5 && i != 6)
+        {
+            var row = document.createElement('div');
+            var sala = document.createElement('h2');
+    
+            $(sala).text('Sala: '+i);
+            $(row).append(sala);
+            $('#griglia').append(row);
+    
+            grigliaConSala(i);
+        }   
     }
 }
 
 function grigliaConSala(id_sala)
 {
+    var contaElementiPerRiga = 0;                                       //E' importante riconoscere il primo oggetto di una sala per impaginare le righe in modo corretto
+    var riga2;
+    DB.forEach(elemento => {
 
-    let contaElementiPerRiga = 0;                                       //E' importante riconoscere il primo oggetto di una sala per impaginare le righe in modo corretto
+        if(elemento.id_sala == id_sala)
+        {
+            if(contaElementiPerRiga % 4 == 0)
+            {
+                console.log(contaElementiPerRiga);
+                console.log(elemento);
+                contaElementiPerRiga++;
 
-    for(i = 1; i < DB.length; i++)                                      //Ciclo per scorrere tutti gli oggetti
+                var riga = document.createElement('div');               //Crea la riga per contenere gli oggetti
+                $(riga).attr({                                          //                                  
+                    'class': 'row-padding',                             //  
+                });                                                     //
+                $('#griglia').append(riga);                             //
+
+                riga2 = riga;
+                var secondoLivello = document.createElement('div');     //Crea la riga per la visualizzazione di secondo livello
+                $(secondoLivello).attr({                                //
+                    'class': 'row-padding',                             //
+                    'style': 'height: 30%;',                            //
+                    'id' : 'row' + i/4                                  //
+                }).hide();                                              //
+                $('#griglia').append(secondoLivello);                   //
+            }
+            creaOggetto(elemento,riga2);                                 //Chiamata al metodo che aggiunge un oggetto alla volta nella prima riga
+        }
+
+    });
+
+    /*for(i = 1; i < DB.length; i++)                                      //Ciclo per scorrere tutti gli oggetti
     {
         if(DB[i].id_sala == id_sala)
         {
-            if(contaElementiPerRiga == 0)
+            if(contaElementiPerRiga % 4 == 0)
             {
                 contaElementiPerRiga++;
 
@@ -236,7 +267,7 @@ function grigliaConSala(id_sala)
             creaOggetto(DB[i],riga);                                    //Chiamata al metodo che aggiunge un oggetto alla volta nella prima riga
 
         }
-    }
+    }*/
 }
 
 function grigliaConCollezione(id_collezione)
